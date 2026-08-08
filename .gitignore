@@ -1,0 +1,29 @@
+# Executables and Binaries
+*.exe
+*.out
+*.app
+*.o
+*.obj
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# Output & Generated Structure Files
+*.pdb
+!docs/*.pdb
+
+# Build Directories
+build/
+bin/
+obj/
+dist/
+
+# IDE and Environment Configs
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+*.log
