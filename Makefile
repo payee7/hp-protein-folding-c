@@ -24,5 +24,9 @@ test: tests/test_energy.c $(SRC)
 	$(CC) $(CFLAGS) tests/test_energy.c src/core/protein.c src/analytics/energy.c src/analytics/metrics.c -o test_runner
 	./test_runner
 
+benchmark: benchmarks/run_benchmarks.c $(SRC)
+	$(CC) $(CFLAGS) benchmarks/run_benchmarks.c src/core/protein.c src/analytics/energy.c src/analytics/metrics.c src/solvers/branch_bound.c src/solvers/simulated_annealing.c -o benchmark_runner
+	./benchmark_runner
+
 clean:
-	rm -f $(TARGET) test_runner *.pdb *.o
+	rm -f $(TARGET) test_runner benchmark_runner *.pdb *.o

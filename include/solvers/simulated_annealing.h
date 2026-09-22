@@ -9,5 +9,6 @@
 #include "core/types.h"
 
 Conformation solve_simulated_annealing(const ProteinSequence *prot, int max_steps, double initial_temp, double cooling_rate, SolverStats *stats);
+Conformation solve_simulated_annealing_3d(const ProteinSequence *prot, int max_steps, double initial_temp, double cooling_rate, SolverStats *stats);
 
 #endif // SIMULATED_ANNEALING_H

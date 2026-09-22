@@ -16,13 +16,14 @@ void export_pdb(const char *filename, const ProteinSequence *prot, const Conform
     fprintf(fp, "REMARK   1 HP LATTICE PROTEIN FOLDING SOLVER OUTPUT\n");
     fprintf(fp, "REMARK   2 SEQUENCE: %s\n", prot->sequence);
     fprintf(fp, "REMARK   3 ENERGY: %d, RADIUS OF GYRATION: %.3f\n", conf->energy, conf->radius_of_gyration);
+    fprintf(fp, "REMARK   4 DIMENSION: %dD CUBIC LATTICE MODEL\n", (conf->dimension == 3) ? 3 : 2);
     
     const double SPACING = 3.8;
     
     for (int i = 0; i < conf->length; i++) {
         double x = conf->coords[i].x * SPACING;
         double y = conf->coords[i].y * SPACING;
-        double z = 0.0;
+        double z = (conf->dimension == 3) ? (conf->coords[i].z * SPACING) : 0.0;
         
         const char *res_name = (prot->amino[i] == AMINO_H) ? "VAL" : "ALA";
         

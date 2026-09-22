@@ -9,19 +9,22 @@
 double calculate_radius_of_gyration(const Conformation *conf) {
     if (conf->length <= 0) return 0.0;
     
-    double cx = 0.0, cy = 0.0;
+    double cx = 0.0, cy = 0.0, cz = 0.0;
     for (int i = 0; i < conf->length; i++) {
         cx += conf->coords[i].x;
         cy += conf->coords[i].y;
+        cz += conf->coords[i].z;
     }
     cx /= conf->length;
     cy /= conf->length;
+    cz /= conf->length;
     
     double sq_sum = 0.0;
     for (int i = 0; i < conf->length; i++) {
         double dx = conf->coords[i].x - cx;
         double dy = conf->coords[i].y - cy;
-        sq_sum += (dx * dx + dy * dy);
+        double dz = conf->coords[i].z - cz;
+        sq_sum += (dx * dx + dy * dy + dz * dz);
     }
     return sqrt(sq_sum / conf->length);
 }

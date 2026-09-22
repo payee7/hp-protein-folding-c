@@ -10,5 +10,6 @@
 
 void init_protein(ProteinSequence *prot, const char *seq_str);
 bool build_coords_from_directions(Conformation *conf);
+bool build_coords_from_directions_3d(Conformation *conf);
 
 #endif // PROTEIN_H

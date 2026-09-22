@@ -39,14 +39,14 @@ hp-protein-folding-c/
 ## Core Features
 
 1. **Decoupled Architecture**: Clean header/source separation for sequence modeling, energy analytics, solvers, and exporters.
-2. **Dual Optimization Solvers**:
-   - **Exact Branch-and-Bound**: Finds global minimum energy states and ground-state degeneracy for polymer chains $\le 25$ residues. Includes 8-fold lattice symmetry breaking and dynamic energy lower-bounding ($\hat{E}(s)$ pruning).
-   - **Metropolis Simulated Annealing**: Stochastic Pivot Monte Carlo search supporting single-bond direction updates and rigid-body subchain rotations (90° / 270°).
+2. **Dual Optimization Solvers (2D & 3D)**:
+   - **Exact Branch-and-Bound**: Finds global minimum energy states and ground-state degeneracy for 2D square ($z=4$) and 3D cubic ($z=6$) polymer chains. Includes 2D/3D symmetry breaking and dynamic energy lower-bounding ($\hat{E}(s)$ pruning).
+   - **Metropolis Simulated Annealing**: Stochastic Pivot Monte Carlo search supporting single-bond updates and rigid-body subchain rotations (2D planar & 3D $SO(3)$ rotations about X, Y, Z axes).
 3. **Biophysical Structural Analytics**:
-   - **Radius of Gyration ($R_g$)**: Computes spatial polymer compactness.
-   - **Hydrophobic Core Index**: Calculates topological non-sequential H-H contact energy $E = -N_{\text{contacts}}$.
+   - **Radius of Gyration ($R_g$)**: Computes 2D/3D spatial polymer compactness and folding density.
+   - **Hydrophobic Core Index**: Calculates topological non-sequential H-H contact energy $E = -N_{\text{contacts}}$ across 4 planar or 6 spatial nearest neighbors.
 4. **Visualizers & Exporters**:
-   - **ASCII 2D Terminal Render**: Visualizes amino acid spatial layouts, hydrophobic cores (`H`), polar shells (`P`), and backbone links (`-`, `|`).
+   - **ASCII 2D & 3D Terminal Render**: Visualizes amino acid spatial layouts, hydrophobic cores (`H`), polar shells (`P`), intra-plane links, and 3D layer-by-layer $Z$-plane projections.
    - **3D PDB Exporter (`.pdb`)**: Generates Standard Protein Data Bank files containing pseudo C-$\alpha$ atom coordinates compatible with PyMOL, VMD, and ChimeraX.
 
 ---
@@ -66,7 +66,9 @@ g++ -O3 -Wall -Iinclude src/core/*.c src/analytics/*.c src/solvers/*.c src/io/*.
 
 ### Build with Makefile
 ```bash
-make
+make            # Build main solver executable
+make test       # Run comprehensive 2D & 3D unit tests
+make benchmark  # Run 2D vs 3D thermodynamic benchmark suite
 ```
 
 ### Build with CMake
@@ -78,7 +80,9 @@ make
 
 ### Run Solver
 ```bash
-./hp_protein_solver "HPHPPHHPHPPHPHHPPHPH"
+./hp_protein_solver "HPHPPHHPHPPHPHHPPHPH"         # Run both 2D and 3D solvers
+./hp_protein_solver "HPHPPHHPHPPHPHHPPHPH" --2d    # Run 2D square lattice only
+./hp_protein_solver "HPHPPHHPHPPHPHHPPHPH" --3d    # Run 3D cubic lattice only
 ```
 
 ---

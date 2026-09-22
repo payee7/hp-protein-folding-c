@@ -9,5 +9,6 @@
 #include "core/types.h"
 
 int calculate_energy(const ProteinSequence *prot, const Conformation *conf);
+int calculate_energy_3d(const ProteinSequence *prot, const Conformation *conf);
 
 #endif // ENERGY_H

@@ -9,5 +9,6 @@
 #include "core/types.h"
 
 Conformation solve_exact_bb(const ProteinSequence *prot, SolverStats *stats);
+Conformation solve_exact_bb_3d(const ProteinSequence *prot, SolverStats *stats);
 
 #endif // BRANCH_BOUND_H
